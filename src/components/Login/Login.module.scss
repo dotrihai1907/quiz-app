@@ -1,0 +1,36 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.text {
+    font-size: 14px;
+}
+
+.change {
+    color: #1890ff;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.remember {
+    float: left;
+}
+
+.forgot {
+    float: right;
+    color: #1890ff;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+
+.button {
+    width: 100%;
+}
