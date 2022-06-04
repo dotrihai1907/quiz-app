@@ -31,7 +31,6 @@ function Questions() {
 
   useEffect(() => {
     if (questions?.length) {
-      const question = questions[questionIndex];
       let answers = [
         question.answer1,
         question.answer2,
@@ -43,9 +42,7 @@ function Questions() {
   }, [questions, questionIndex]);
 
   const handleClickAnswer = () => {
-    if (questionIndex + 1 < questions.length) {
-      setQuestionIndex(questionIndex + 1);
-    }
+    setQuestionIndex(questionIndex + 1);
   };
 
   return (
@@ -56,6 +53,8 @@ function Questions() {
         </Title>
         <Title level={4}>{questions[questionIndex].question}</Title>
       </div>
+
+      <div className="answer">
       {options.map((option, index) => (
         <Button
           block
@@ -68,6 +67,29 @@ function Questions() {
           {option}
         </Button>
       ))}
+      </div>
+
+      <Divider />
+
+      <div className="function-keys">
+        <Row justify="space-around">
+          <Button shape="round" disabled={!questionIndex} onClick={handleBack}>
+            Back
+          </Button>
+
+          <Button shape="round" onClick={handleSaveandSubmitAnswer}>
+            {questionIndex + 1 < questions.length ? "Save & Next" : "Submit"}
+          </Button>
+
+          <Button
+            shape="round"
+            disabled={questionIndex + 1 < questions.length ? false : true}
+            onClick={handleSkip}
+          >
+            Skip
+          </Button>
+        </Row>
+      </div>
     </div>
   );
 }
