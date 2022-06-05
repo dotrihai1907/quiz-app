@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import tokenExpried from "./api/tokenExpired";
 
-import { RedirectRole, UserRole } from "./pages/RouteGuard";
+import { RedirectRole, UserRole, AdminRole } from "./pages/RouteGuard";
 
 import Home from "./pages/Home";
 import Register from "./components/Register";
@@ -53,13 +53,20 @@ function App() {
               <Route path="/register" element={<Register />} />
             </Route>
 
-            <Route element={<UserRole />}>
+            <Route element={<UserRole accessToken={accessToken} role={role} />}>
               <Route path="/quizsetting" element={<QuizSetting />} />
               <Route path="/questions" element={<Questions />} />
               <Route path="/resultquiz" element={<ResultQuiz />} />
             </Route>
 
-            <Route path="/admin" element={<Admin />} />
+            <Route
+              element={<AdminRole accessToken={accessToken} role={role} />}
+            >
+              <Route path="/admin" element={<Admin />}>
+                <Route path="/admin/edituser" element={<EditUser />} />
+                <Route path="/admin/editquestion" element={<EditQuestion />} />
+              </Route>
+            </Route>
           </Route>
         </Routes>
       </div>

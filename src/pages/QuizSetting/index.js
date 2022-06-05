@@ -14,7 +14,6 @@ function QuizSetting() {
 
   const dispatch = useDispatch();
   const maxQuestions = useSelector(selectMaxQuestions);
-  console.log(maxQuestions);
   const navigate = useNavigate();
 
   const handleQuiz = () => {
