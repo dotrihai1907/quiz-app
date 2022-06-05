@@ -9,6 +9,8 @@ import { RedirectRole, UserRole } from "./pages/RouteGuard";
 import Home from "./pages/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
+import EditQuestion from "./components/EditQuestion";
+import EditUser from "./components/EditUser";
 
 import QuizSetting from "./pages/QuizSetting";
 import Questions from "./pages/Questions";
