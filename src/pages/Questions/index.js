@@ -58,7 +58,7 @@ function Questions() {
     question?.answer4,
   ]);
 
-  const handleClickAnswer = (option) => {
+  const handleAnswer = (option) => {
     setAnswer(option);
   };
 
@@ -78,8 +78,6 @@ function Questions() {
       });
     } else {
       dispatch(saveAnswer({ id: questionId, correctanswer: answer }));
-      console.log(`id: ${questionId}, correctanswer: ${answer}`);
-      console.log(answers);
       setAnswer("");
       if (questionIndex + 1 < questions.length) {
         setQuestionIndex((questionIndex) => questionIndex + 1);
@@ -106,7 +104,7 @@ function Questions() {
             shape="round"
             className={styles.answer}
             key={index}
-            onClick={() => handleClickAnswer(option)}
+            onClick={() => handleAnswer(option)}
           >
             {option}
           </Button>
@@ -115,7 +113,7 @@ function Questions() {
 
       <Divider />
 
-      <div className="function-keys">
+      <div className="navigation">
         <Row justify="space-around">
           <Button shape="round" disabled={!questionIndex} onClick={handleBack}>
             Back

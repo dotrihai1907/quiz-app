@@ -8,7 +8,7 @@ export const getQuestion = (accessToken, amount) => async (dispatch) => {
     const { data } = await axios.get(`/v1/questions?limit=${amount}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    dispatch(getQuestionSuccess(data.results));
+    dispatch(getQuestionSuccess(data));
   } catch (error) {
     Modal.error({
       title: "Error getting questions",

@@ -14,3 +14,9 @@ export const selectAmount = createSelector(
   [selectQuestion],
   (questionSlice) => questionSlice?.amount
 );
+
+// trỏ đến item maxQuestions của questionSlice
+export const selectMaxQuestions = createSelector(
+  [selectQuestion],
+  (questionSlice) => questionSlice?.maxQuestions
+);

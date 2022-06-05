@@ -52,7 +52,7 @@ function App() {
             </Route>
 
             <Route element={<UserRole />}>
-              <Route index path="/quizsetting" element={<QuizSetting />} />
+              <Route path="/quizsetting" element={<QuizSetting />} />
               <Route path="/questions" element={<Questions />} />
               <Route path="/resultquiz" element={<ResultQuiz />} />
             </Route>

@@ -2,15 +2,19 @@ import styles from "./QuizSetting.module.scss";
 import "antd/dist/antd.css";
 
 import { Typography, InputNumber } from "antd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import { changeAmount } from "../../redux/question/reducer";
+
+import { selectMaxQuestions } from "../../redux/question/selector";
 
 function QuizSetting() {
   const { Text, Title } = Typography;
 
   const dispatch = useDispatch();
+  const maxQuestions = useSelector(selectMaxQuestions);
+  console.log(maxQuestions);
   const navigate = useNavigate();
 
   const handleQuiz = () => {
@@ -32,7 +36,7 @@ function QuizSetting() {
         className={styles.input}
         autoFocus
         min={1}
-        max={11}
+        max={maxQuestions}
         onChange={(e) => dispatch(changeAmount(e))}
       />
 

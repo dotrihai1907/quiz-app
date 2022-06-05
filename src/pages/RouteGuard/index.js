@@ -10,6 +10,12 @@ export const RedirectRole = ({ role, accessToken }) => {
   return <Outlet />;
 };
 
-export const UserRole = () => {
+export const UserRole = ({ role, accessToken }) => {
+  if (accessToken === null) {
+    return <Navigate to="/" />;
+  }
+  if (accessToken && role === "admin") {
+    return <Navigate to="/" />;
+  }
   return <Outlet />;
 };

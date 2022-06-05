@@ -5,10 +5,12 @@ const questionSlice = createSlice({
   initialState: {
     questions: [],
     amount: 1,
+    maxQuestions: 11,
   },
   reducers: {
     getQuestionSuccess: (state, action) => {
-      state.questions = action.payload;
+      state.questions = action.payload.results;
+      state.maxQuestions = action.payload.totalResults;
     },
     changeAmount: (state, action) => {
       state.amount = action.payload;

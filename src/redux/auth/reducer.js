@@ -10,10 +10,15 @@ const authSlice = createSlice({
       state.auth = action.payload;
     },
     refreshSuccess: (state, action) => {
-      state.auth = { ...state.auth, tokens: action.payload };
+      state.auth.tokens = action.payload;
+    },
+    calculateScore: (state, action) => {
+      const totalTrue = action.payload.filter((item) => item.result === true);
+      state.auth.user.score = totalTrue.length;
     },
   },
 });
 
-export const { loginSuccess, refreshSuccess } = authSlice.actions;
+export const { loginSuccess, refreshSuccess, calculateScore } =
+  authSlice.actions;
 export default authSlice.reducer;

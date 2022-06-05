@@ -21,9 +21,12 @@ const answerSlice = createSlice({
         });
       }
     },
+    resetQuiz: (state) => {
+      state.answers = [];
+    },
   },
 });
 
-export const { saveAnswer } = answerSlice.actions;
+export const { saveAnswer, resetQuiz } = answerSlice.actions;
 
 export default answerSlice.reducer;
