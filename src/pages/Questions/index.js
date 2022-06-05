@@ -77,14 +77,13 @@ function Questions() {
         content: "You have not selected an answer",
       });
     } else {
-      dispatch(saveAnswer({ id: questionId, correctAnswer: answer }));
-      console.log(`id: ${questionId}, correctAnswer: ${answer}`);
+      dispatch(saveAnswer({ id: questionId, correctanswer: answer }));
+      console.log(`id: ${questionId}, correctanswer: ${answer}`);
       console.log(answers);
       setAnswer("");
       if (questionIndex + 1 < questions.length) {
         setQuestionIndex((questionIndex) => questionIndex + 1);
       } else {
-        console.log(accessToken, answers, navigate);
         dispatch(submitAnswer(accessToken, answers, navigate));
       }
     }

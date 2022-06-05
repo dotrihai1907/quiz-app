@@ -15,7 +15,7 @@ const answerSlice = createSlice({
       } else {
         state.answers.map((answer) => {
           if (answer.id === action.payload.id) {
-            answer.correctAnswer = action.payload.correctAnswer;
+            answer.correctanswer = action.payload.correctanswer;
           }
           return state.answers;
         });

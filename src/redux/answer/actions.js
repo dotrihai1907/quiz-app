@@ -4,7 +4,7 @@ import axios from "../../api/axios";
 
 export const submitAnswer = (accessToken, answers, navigate) => async () => {
   try {
-    await axios.post("/v1/questions/submit", answers, {
+    await axios.post("/v1/questions/submit", [...answers], {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
     navigate("/resultquiz");
