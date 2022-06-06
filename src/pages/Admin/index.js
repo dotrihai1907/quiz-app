@@ -1,11 +1,38 @@
+import styles from "./Admin.module.scss";
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  UserAddOutlined,
+  ReadOutlined,
+} from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 
+import {
+  selectUsernameAuth,
+  selectAccessToken,
+} from "../../redux/auth/selector";
+
+import { getUsers } from "../../redux/user/actions";
+
+const { Header, Sider, Content } = Layout;
+
 function Admin() {
+  const usernameAuth = useSelector(selectUsernameAuth);
+  const accessToken = useSelector(selectAccessToken);
+
+  const dispatch = useDispatch();
+
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
     <div>
       <Layout className={styles.container}>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className={styles.logo} />
+        <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
+          <div className={styles.logo}>{usernameAuth}</div>
           <Menu
             theme="light"
             mode="inline"
@@ -13,12 +40,16 @@ function Admin() {
             items={[
               {
                 key: "1",
-                icon: <UserOutlined />,
+                icon: (
+                  <UserAddOutlined
+                    onClick={() => dispatch(getUsers(accessToken))}
+                  />
+                ),
                 label: "User",
               },
               {
                 key: "2",
-                icon: <VideoCameraOutlined />,
+                icon: <ReadOutlined />,
                 label: "Question",
               },
             ]}
@@ -46,16 +77,15 @@ function Admin() {
           <Content
             className={styles.site_layout_background}
             style={{
-              margin: "24px 16px",
+              margin: "16px 16px",
               padding: 24,
               minHeight: 280,
             }}
           >
-            Content
+            <Outlet />
           </Content>
         </Layout>
       </Layout>
-      <Outlet />
     </div>
   );
 }

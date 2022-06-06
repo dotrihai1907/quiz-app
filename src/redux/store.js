@@ -15,11 +15,13 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./auth/reducer";
 import questionReducer from "./question/reducer";
 import answerReducer from "./answer/reducer";
+import userReducer from "./user/reducer";
 
 const reducer = combineReducers({
   authentication: authReducer,
   question: questionReducer,
   answer: answerReducer,
+  user: userReducer,
 });
 
 const persistConfig = {

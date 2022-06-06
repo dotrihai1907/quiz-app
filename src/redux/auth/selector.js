@@ -17,6 +17,11 @@ export const selectRole = createSelector([selectUser], (user) => user?.role);
 
 export const selectScore = createSelector([selectUser], (user) => user?.score);
 
+export const selectUsernameAuth = createSelector(
+  [selectUser],
+  (user) => user?.username
+);
+
 //---------------tokens--------------------------------
 
 const selectTokens = createSelector([selectAuth], (auth) => auth?.tokens);
@@ -30,6 +35,3 @@ export const selectRefreshToken = createSelector(
   [selectTokens],
   (tokens) => tokens?.refresh.token
 );
-
-
-

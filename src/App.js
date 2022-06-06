@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import EditQuestion from "./components/EditQuestion";
-import EditUser from "./components/EditUser";
+import UserManage from "./components/UserManage";
 
 import QuizSetting from "./pages/QuizSetting";
 import Questions from "./pages/Questions";
@@ -63,7 +63,7 @@ function App() {
               element={<AdminRole accessToken={accessToken} role={role} />}
             >
               <Route path="/admin" element={<Admin />}>
-                <Route path="/admin/edituser" element={<EditUser />} />
+                <Route index element={<UserManage />} />
                 <Route path="/admin/editquestion" element={<EditQuestion />} />
               </Route>
             </Route>
