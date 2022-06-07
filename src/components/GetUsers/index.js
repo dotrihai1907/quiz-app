@@ -1,14 +1,14 @@
-import styles from "./UserManage.module.scss";
 import "antd/dist/antd.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table } from "antd";
+import { Button, Input, Space, Table, Typography } from "antd";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 
 import { useSelector } from "react-redux";
 import { selectUsers } from "../../redux/user/selector";
 
-function UserManage() {
+function GetUsers() {
+  const { Title } = Typography;
   const users = useSelector(selectUsers);
 
   const data = users.map((user, index) => ({
@@ -159,9 +159,17 @@ function UserManage() {
 
   return (
     <div>
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        title={() => (
+          <Title level={3} style={{ textAlign: "center" }}>
+            List Of Registered Accounts
+          </Title>
+        )}
+      />
     </div>
   );
 }
 
-export default UserManage;
+export default GetUsers;

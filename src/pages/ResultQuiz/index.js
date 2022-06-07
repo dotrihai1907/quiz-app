@@ -33,30 +33,32 @@ function ResultQuiz() {
 
   return (
     <div>
-      <div className={styles.title}>
-        <Title level={2}>Your result</Title>
-        <Text strong style={{ fontSize: 24 }}>
-          {totalTrue}/{totalAmount}
-        </Text>
-      </div>
+      <div className={styles.result}>
+        <div className={styles.title}>
+          <Title level={2}>Your result</Title>
+          <Text strong style={{ fontSize: 24 }}>
+            {totalTrue}/{totalAmount}
+          </Text>
+        </div>
 
-      <Progress
-        type="circle"
-        strokeColor={{
-          "0%": "#108ee9",
-          "100%": "#87d068",
-        }}
-        percent={score}
-      />
+        <Progress
+          type="circle"
+          strokeColor={{
+            "0%": "#108ee9",
+            "100%": "#87d068",
+          }}
+          percent={score}
+        />
 
-      <div className={styles.text}>
-        {score > 99 && (
-          <Text italic>You are so cool. You got a perfect score!</Text>
-        )}
-        {score <= 99 && score > 70 && (
-          <Text italic>Well done. That's a good score</Text>
-        )}
-        {score <= 70 && <Text italic>Oh no. You need to try harder ...</Text>}
+        <div className={styles.text}>
+          {score > 99 && (
+            <Text italic>You are so cool. You got a perfect score!</Text>
+          )}
+          {score <= 99 && score > 70 && (
+            <Text italic>Well done. That's a good score</Text>
+          )}
+          {score <= 70 && <Text italic>Oh no. You need to try harder ...</Text>}
+        </div>
       </div>
 
       <Row justify="space-evenly">

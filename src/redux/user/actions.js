@@ -16,3 +16,29 @@ export const getUsers = (accessToken) => async (dispatch) => {
     });
   }
 };
+
+export const createUser = (values, accessToken, form) => async () => {
+  try {
+    await axios.post(
+      "/v1/users",
+      {
+        username: values.username,
+        password: values.password,
+        email: values.email,
+        role: values.role,
+      },
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      }
+    );
+    Modal.success({
+      title: "Create successed",
+    });
+    form.resetFields();
+  } catch (error) {
+    Modal.error({
+      title: "Create failed",
+      content: error.response.data.message,
+    });
+  }
+};

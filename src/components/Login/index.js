@@ -25,7 +25,9 @@ function Login() {
     <div>
       <Row>
         <Col span={16} offset={4}>
-          <Title level={2}>Log In</Title>
+          <Title level={2} style={{ textAlign: "center" }}>
+            Log In
+          </Title>
           <Form
             name="normal_login"
             className={styles.form}
@@ -48,6 +50,7 @@ function Login() {
                 placeholder="Username"
               />
             </Form.Item>
+
             <Form.Item
               name="password"
               rules={[

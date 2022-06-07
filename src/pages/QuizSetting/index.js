@@ -20,8 +20,12 @@ function QuizSetting() {
     navigate("/questions");
   };
 
+  const handleAmount = (value) => {
+    dispatch(changeAmount(value));
+  };
+
   return (
-    <div>
+    <div className={styles.container}>
       <Title level={2} className={styles.title}>
         Quiz App
       </Title>
@@ -36,7 +40,9 @@ function QuizSetting() {
         autoFocus
         min={1}
         max={maxQuestions}
-        onChange={(e) => dispatch(changeAmount(e))}
+        onChange={(value) => {
+          return handleAmount(value);
+        }}
       />
 
       <div className={styles.loader} onClick={handleQuiz}>

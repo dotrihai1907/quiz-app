@@ -89,26 +89,28 @@ function Questions() {
 
   return (
     <div>
-      <div className="question">
-        <Title level={2}>
-          Question {questionIndex + 1}/{questions.length}
-        </Title>
-        <Title level={4}>{question?.question}</Title>
-      </div>
+      <div className={styles.content}>
+        <div className="question">
+          <Title level={2}>
+            Question {questionIndex + 1}/{questions.length}
+          </Title>
+          <Title level={4}>{question?.question}</Title>
+        </div>
 
-      <div className="answer">
-        {options.map((option, index) => (
-          <Button
-            block
-            size="large"
-            shape="round"
-            className={styles.answer}
-            key={index}
-            onClick={() => handleAnswer(option)}
-          >
-            {option}
-          </Button>
-        ))}
+        <div className="answer">
+          {options.map((option, index) => (
+            <Button
+              block
+              size="large"
+              shape="round"
+              className={styles.answer}
+              key={index}
+              onClick={() => handleAnswer(option)}
+            >
+              {option}
+            </Button>
+          ))}
+        </div>
       </div>
 
       <Divider />

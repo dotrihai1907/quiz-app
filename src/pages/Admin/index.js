@@ -2,6 +2,8 @@ import styles from "./Admin.module.scss";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  FolderOpenOutlined,
+  UserOutlined,
   UserAddOutlined,
   ReadOutlined,
 } from "@ant-design/icons";
@@ -10,6 +12,8 @@ import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 
 import {
   selectUsernameAuth,
@@ -25,8 +29,14 @@ function Admin() {
   const accessToken = useSelector(selectAccessToken);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [collapsed, setCollapsed] = useState(false);
+
+  const handleGetUsers = () => {
+    dispatch(getUsers(accessToken));
+    navigate("/admin/getusers");
+  };
 
   return (
     <div>
@@ -37,15 +47,28 @@ function Admin() {
             theme="light"
             mode="inline"
             defaultSelectedKeys={["1"]}
+            defaultOpenKeys={["sub1"]}
             items={[
               {
                 key: "1",
-                icon: (
-                  <UserAddOutlined
-                    onClick={() => dispatch(getUsers(accessToken))}
-                  />
-                ),
+                icon: <FolderOpenOutlined />,
                 label: "User",
+                children: [
+                  {
+                    key: "sub1",
+                    icon: <UserOutlined onClick={handleGetUsers} />,
+                    label: "Get Users",
+                  },
+                  {
+                    key: "sub2",
+                    icon: (
+                      <UserAddOutlined
+                        onClick={() => navigate("/admin/createuser")}
+                      />
+                    ),
+                    label: "Create User",
+                  },
+                ],
               },
               {
                 key: "2",

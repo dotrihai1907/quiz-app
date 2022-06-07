@@ -1,6 +1,6 @@
 import "antd/dist/antd.css";
 import styles from "./Register.module.scss";
-import { Form, Input, Checkbox, Button, Typography } from "antd";
+import { Form, Input, Checkbox, Button, Typography, Row } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -55,7 +55,9 @@ function Register() {
 
   return (
     <div>
-      <Title level={2}>Create New Account</Title>
+      <Row justify="center">
+        <Title level={2}>Create New Account</Title>
+      </Row>
 
       <Form
         className={styles.form}
