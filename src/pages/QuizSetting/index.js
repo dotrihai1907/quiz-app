@@ -10,7 +10,7 @@ import { changeAmount } from "../../redux/question/reducer";
 import { selectMaxQuestions } from "../../redux/question/selector";
 
 function QuizSetting() {
-  const { Text, Title } = Typography;
+  const { Text, Title, Paragraph } = Typography;
 
   const dispatch = useDispatch();
   const maxQuestions = useSelector(selectMaxQuestions);
@@ -33,6 +33,10 @@ function QuizSetting() {
       <Text className={styles.text} italic>
         Amount of Questions
       </Text>
+      <br />
+      <Paragraph italic className={styles.paragraph}>
+        Up to {maxQuestions} questions
+      </Paragraph>
       <br />
       <InputNumber
         size="large"

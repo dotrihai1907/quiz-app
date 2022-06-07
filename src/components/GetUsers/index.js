@@ -1,6 +1,16 @@
 import "antd/dist/antd.css";
 import { SearchOutlined } from "@ant-design/icons";
-import { Button, Input, Space, Table, Typography } from "antd";
+import {
+  Form,
+  Button,
+  Input,
+  Space,
+  Popconfirm,
+  Table,
+  Typography,
+  Tag,
+  Avatar,
+} from "antd";
 import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 
@@ -17,7 +27,11 @@ function GetUsers() {
     email: user.email,
     role: user.role,
     score: user.score,
+    avatar: user.avatar,
   }));
+
+
+  //-------------sort/search--------
 
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
@@ -138,28 +152,57 @@ function GetUsers() {
       title: "Email",
       dataIndex: "email",
       key: "email",
-      width: "40%",
+      width: "30%",
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
-      width: "20%",
+      width: "15%",
       sorter: (a, b) => a.role.length - b.role.length,
       sortDirections: ["descend", "ascend"],
+      render: (role) => {
+        let color = role === "admin" ? "magenta" : "green";
+        if (role === "user") {
+          color = "purple";
+        }
+        return (
+          <Tag style={{ minWidth: "50px", textAlign: "center" }} color={color}>
+            {role}
+          </Tag>
+        );
+      },
     },
     {
       title: "Score",
       dataIndex: "score",
       key: "score",
+      width: "15%",
       sorter: (a, b) => a.score.length - b.score.length,
       sortDirections: ["descend", "ascend"],
+    },
+    {
+      title: "Avatar",
+      dataIndex: "avatar",
+      key: "avatar",
+      width: "20%",
+      render: (avatar) => (
+        <Avatar
+          src={avatar}
+          size={{
+            xs: 24,
+            md: 40,
+            xl: 60,
+          }}
+        />
+      ),
     },
   ];
 
   return (
     <div>
       <Table
+        sticky
         columns={columns}
         dataSource={data}
         title={() => (

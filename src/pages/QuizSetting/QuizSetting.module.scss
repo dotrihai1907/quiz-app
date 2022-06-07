@@ -8,14 +8,18 @@
       margin-top: 5%;
   }
   
+  .paragraph {
+  font-size: 12px;
+  color: #1890ff;
+}
+
   .input {
       width: 30%;
-      margin: 1%
   }
   
   .loader {
     position: relative;
-    margin: 15% auto;
+    margin: 8% auto;
     &:hover {
         cursor: pointer;
         opacity: 0.7;
@@ -26,8 +30,8 @@
   .middle,
   .inner {
     border: 3px solid transparent;
-    border-top-color: #0a585f;
-    border-right-color: #0a585f;
+    border-top-color: #0a61b2;
+    border-right-color: #0a61b2;
     border-radius: 50%;
     position: absolute;
     top: 50%;

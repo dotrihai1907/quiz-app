@@ -5,10 +5,10 @@ import { getUsersSuccess } from "./reducer";
 
 export const getUsers = (accessToken) => async (dispatch) => {
   try {
-    const { data } = await axios.get("/v1/users", {
+    const { data } = await axios.get("/v1/users?limit=500", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    dispatch(getUsersSuccess(data.results));
+    dispatch(getUsersSuccess(data));
   } catch (error) {
     Modal.error({
       title: "Get users failed",

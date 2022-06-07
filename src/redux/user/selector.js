@@ -4,7 +4,21 @@ import { createSelector } from "reselect";
 const selectUser = (state) => state.user;
 
 // trỏ đến item users của userSlice
-export const selectUsers = createSelector(
+const selectUsersByAdmin = createSelector(
   [selectUser],
   (userSlice) => userSlice?.users // userSlice && userSlice.users
+);
+
+//-----------------users-------------------------------
+
+export const selectUsers = createSelector(
+  [selectUsersByAdmin],
+  (users) => users?.results
+);
+
+//---------------totalUsers--------------------------
+
+export const selectTotalUsers = createSelector(
+  [selectUsersByAdmin],
+  (users) => users?.totalResults
 );
