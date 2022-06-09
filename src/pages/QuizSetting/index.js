@@ -27,7 +27,7 @@ function QuizSetting() {
   return (
     <div className={styles.container}>
       <Title level={2} className={styles.title}>
-        Quiz App
+        Puzzle Number Option
       </Title>
 
       <Text className={styles.text} italic>
@@ -35,7 +35,7 @@ function QuizSetting() {
       </Text>
       <br />
       <Paragraph italic className={styles.paragraph}>
-        Up to {maxQuestions} questions
+        More than {maxQuestions} questions
       </Paragraph>
       <br />
       <InputNumber

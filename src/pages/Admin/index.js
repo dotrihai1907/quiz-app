@@ -6,10 +6,12 @@ import {
   UserOutlined,
   UserAddOutlined,
   ReadOutlined,
+  FolderOutlined,
+  FolderAddOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 
@@ -21,6 +23,7 @@ import {
 } from "../../redux/auth/selector";
 
 import { getUsers } from "../../redux/user/actions";
+import { getQuestionsAdmin } from "../../redux/question/actions";
 
 const { Header, Sider, Content } = Layout;
 
@@ -38,6 +41,12 @@ function Admin() {
     navigate("/admin/getusers");
   };
 
+  const handleGetQuestions = () => {
+    console.log(accessToken);
+    dispatch(getQuestionsAdmin(accessToken));
+    navigate("/admin/getquestionsadmin");
+  };
+
   return (
     <div>
       <Layout className={styles.container}>
@@ -46,8 +55,6 @@ function Admin() {
           <Menu
             theme="light"
             mode="inline"
-            defaultSelectedKeys={["1"]}
-            defaultOpenKeys={["sub1"]}
             items={[
               {
                 key: "1",
@@ -55,12 +62,12 @@ function Admin() {
                 label: "User",
                 children: [
                   {
-                    key: "sub1",
+                    key: "subuser1",
                     icon: <UserOutlined onClick={handleGetUsers} />,
                     label: "Get Users",
                   },
                   {
-                    key: "sub2",
+                    key: "subuser2",
                     icon: (
                       <UserAddOutlined
                         onClick={() => navigate("/admin/createuser")}
@@ -74,6 +81,22 @@ function Admin() {
                 key: "2",
                 icon: <ReadOutlined />,
                 label: "Question",
+                children: [
+                  {
+                    key: "subquestion1",
+                    icon: <FolderOutlined onClick={handleGetQuestions} />,
+                    label: "Get Questions",
+                  },
+                  {
+                    key: "subquestion2",
+                    icon: (
+                      <FolderAddOutlined
+                        onClick={() => navigate("/admin/createquestion")}
+                      />
+                    ),
+                    label: "Create Question",
+                  },
+                ],
               },
             ]}
           />

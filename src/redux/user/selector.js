@@ -15,10 +15,3 @@ export const selectUsers = createSelector(
   [selectUsersByAdmin],
   (users) => users?.results
 );
-
-//---------------totalUsers--------------------------
-
-export const selectTotalUsers = createSelector(
-  [selectUsersByAdmin],
-  (users) => users?.totalResults
-);

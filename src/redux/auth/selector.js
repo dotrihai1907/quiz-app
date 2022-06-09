@@ -22,6 +22,13 @@ export const selectUsernameAuth = createSelector(
   (user) => user?.username
 );
 
+export const selectAvatar = createSelector(
+  [selectUser],
+  (user) => user?.avatar
+);
+
+export const selectEmail = createSelector([selectUser], (user) => user?.email);
+
 //---------------tokens--------------------------------
 
 const selectTokens = createSelector([selectAuth], (auth) => auth?.tokens);

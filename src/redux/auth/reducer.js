@@ -16,9 +16,12 @@ const authSlice = createSlice({
       const totalTrue = action.payload.filter((item) => item.result === true);
       state.auth.user.score = totalTrue.length;
     },
+    logoutSuccess: (state) => {
+      state.auth = null;
+    },
   },
 });
 
-export const { loginSuccess, refreshSuccess, calculateScore } =
+export const { loginSuccess, refreshSuccess, calculateScore, logoutSuccess } =
   authSlice.actions;
 export default authSlice.reducer;

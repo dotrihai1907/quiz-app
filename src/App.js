@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
@@ -9,7 +10,8 @@ import { RedirectRole, UserRole, AdminRole } from "./pages/RouteGuard";
 import Home from "./pages/Home";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import EditQuestion from "./components/EditQuestion";
+import GetQuestionsAdmin from "./components/GetQuestionsAdmin";
+import CreateQuestion from "./components/CreateQuestion";
 import GetUsers from "./components/GetUsers";
 import CreateUser from "./components/CreateUser";
 
@@ -18,6 +20,8 @@ import Questions from "./pages/Questions";
 import ResultQuiz from "./pages/ResultQuiz";
 
 import Admin from "./pages/Admin";
+
+import NotFound from "./pages/NotFound";
 
 import {
   selectRole,
@@ -40,7 +44,7 @@ function App() {
         dispatch(refresh(refreshToken));
       });
     }
-  }, [accessToken, dispatch, refreshToken]);
+  }, [accessToken, refreshToken]);
 
   return (
     <Router>
@@ -66,10 +70,20 @@ function App() {
               <Route path="/admin" element={<Admin />}>
                 <Route path="/admin/getusers" element={<GetUsers />} />
                 <Route path="/admin/createuser" element={<CreateUser />} />
-                <Route path="/admin/editquestion" element={<EditQuestion />} />
+
+                <Route
+                  path="/admin/getquestionsadmin"
+                  element={<GetQuestionsAdmin />}
+                />
+                <Route
+                  path="/admin/createquestion"
+                  element={<CreateQuestion />}
+                />
               </Route>
             </Route>
           </Route>
+
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>

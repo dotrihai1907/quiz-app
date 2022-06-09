@@ -1,7 +1,7 @@
 import "antd/dist/antd.css";
 import { Modal } from "antd";
 import axios from "../../api/axios";
-import { getUsersSuccess } from "./reducer";
+import { getUsersSuccess, updateUserSuccess } from "./reducer";
 
 export const getUsers = (accessToken) => async (dispatch) => {
   try {
@@ -42,3 +42,25 @@ export const createUser = (values, accessToken, form) => async () => {
     });
   }
 };
+
+export const updateUser =
+  (accessToken, userUpdate, userIdUpdate) => async (dispatch) => {
+    try {
+      const { data } = await axios.patch(
+        `/v1/users/${userIdUpdate}`,
+        userUpdate,
+        {
+          headers: { Authorization: `Bearer ${accessToken}` },
+        }
+      );
+      dispatch(updateUserSuccess(data));
+      Modal.success({
+        title: "Update user successed",
+      });
+    } catch (error) {
+      Modal.error({
+        title: "Update user failed",
+        content: error.response.data.message,
+      });
+    }
+  };

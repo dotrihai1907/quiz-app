@@ -1,49 +1,47 @@
-import "antd/dist/antd.css";
 import {
   SearchOutlined,
   EditOutlined,
+  DeleteOutlined,
   SaveOutlined,
   StopOutlined,
 } from "@ant-design/icons";
 import {
-  Button,
   Input,
-  Space,
   Table,
-  Typography,
-  Tag,
-  Avatar,
+  Space,
+  Button,
   Row,
   Form,
   Popconfirm,
   Tooltip,
+  Typography,
 } from "antd";
-import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
+import { useState, useRef, createContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { selectUsers } from "../../redux/user/selector";
+import { selectQuestionsAdmin } from "../../redux/question/selector";
 import { selectAccessToken } from "../../redux/auth/selector";
 
-import { updateUser } from "../../redux/user/actions";
+import { updateQuestion, deleteQuestion } from "../../redux/question/actions";
 
-function GetUsers() {
+function GetQuestionsAdmin() {
   const { Title } = Typography;
   const dispatch = useDispatch();
-  const users = useSelector(selectUsers);
+  const questionsAdmin = useSelector(selectQuestionsAdmin);
   const accessToken = useSelector(selectAccessToken);
 
-  const originData = users.map((user) => ({
-    key: user.id,
-    username: user.username,
-    email: user.email,
-    role: user.role,
-    score: user.score,
-    avatar: user.avatar,
+  const originData = questionsAdmin.map((item) => ({
+    key: item.id,
+    question: item.question,
+    answer1: item.answer1,
+    answer2: item.answer2,
+    answer3: item.answer3,
+    answer4: item.answer4,
+    correctanswer: item.correctanswer,
   }));
 
-  //-------------search--------
-
+  //=======search============================
   const [searchText, setSearchText] = useState("");
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
@@ -151,8 +149,7 @@ function GetUsers() {
       ),
   });
 
-  //---------------edit----------------
-
+  //=================edit=======
   const EditableCell = ({
     editing,
     dataIndex,
@@ -193,9 +190,12 @@ function GetUsers() {
 
   const edit = (record) => {
     form.setFieldsValue({
-      username: "",
-      email: "",
-      role: "",
+      question: "",
+      answer1: "",
+      answer2: "",
+      answer3: "",
+      answer4: "",
+      correctanswer: "",
       ...record,
     });
     setEditingKey(record.key);
@@ -222,79 +222,83 @@ function GetUsers() {
         setEditingKey("");
       }
 
-      let userUpdate = { ...newData[index] };
-      delete userUpdate.key;
-      delete userUpdate.score;
+      let questionUpdate = { ...newData[index] };
+      delete questionUpdate.key;
 
-      let userIdUpdate = newData[index].key;
+      let questionIdUpdate = newData[index].key;
 
-      dispatch(updateUser(accessToken, userUpdate, userIdUpdate));
+      dispatch(updateQuestion(accessToken, questionUpdate, questionIdUpdate));
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
     }
   };
 
-  //-----------------------------------------
+  //==============delete=================
+
+  const EditableContext = createContext(null);
+  const EditableRow = ({ index, ...props }) => {
+    const [form] = Form.useForm();
+    return (
+      <Form form={form} component={false}>
+        <EditableContext.Provider value={form}>
+          <tr {...props} />
+        </EditableContext.Provider>
+      </Form>
+    );
+  };
+
+  const handleDelete = (key) => {
+    const newData = originData.filter((item) => item.key !== key);
+    setData(newData);
+
+    dispatch(deleteQuestion(key, accessToken));
+  };
+
+  //===========================
 
   const columns = [
     {
-      title: "Username",
-      dataIndex: "username",
-      key: "username",
+      title: "Question",
+      dataIndex: "question",
+      key: "question",
       width: "20%",
       editable: true,
-      ...getColumnSearchProps("username"),
+      ...getColumnSearchProps("question"),
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-      width: "30%",
+      title: "Answer 1",
+      dataIndex: "answer1",
+      key: "answer1",
+      width: "14%",
       editable: true,
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-      width: "15%",
+      title: "Answer 2",
+      dataIndex: "answer2",
+      key: "answer2",
+      width: "14%",
       editable: true,
-      sorter: (a, b) => a.role.length - b.role.length,
-      sortDirections: ["descend", "ascend"],
-      render: (role) => {
-        let color = role === "admin" ? "magenta" : "green";
-        if (role === "user") {
-          color = "purple";
-        }
-        return (
-          <Tag style={{ minWidth: "50px", textAlign: "center" }} color={color}>
-            {role}
-          </Tag>
-        );
-      },
     },
     {
-      title: "Score",
-      dataIndex: "score",
-      key: "score",
-      width: "10%",
-      sorter: (a, b) => a.score.length - b.score.length,
-      sortDirections: ["descend", "ascend"],
+      title: "Answer 3",
+      dataIndex: "answer3",
+      key: "answer3",
+      width: "14%",
+      editable: true,
     },
     {
-      title: "Avatar",
-      dataIndex: "avatar",
-      key: "avatar",
-      width: "15%",
-      render: (avatar) => (
-        <Avatar
-          src={avatar}
-          size={{
-            xs: 24,
-            md: 40,
-            xl: 60,
-          }}
-        />
-      ),
+      title: "Answer 4",
+      dataIndex: "answer4",
+      key: "answer4",
+      width: "14%",
+      editable: true,
+    },
+    {
+      title: "Correct Answer",
+      dataIndex: "correctanswer",
+      key: "correctanswer",
+      width: "14%",
+      editable: true,
     },
     {
       title: "Action",
@@ -315,12 +319,22 @@ function GetUsers() {
             </Popconfirm>
           </Row>
         ) : (
-          <Tooltip placement="top" title="Edit">
-            <EditOutlined
-              disabled={editingKey !== ""}
-              onClick={() => edit(record)}
-            />
-          </Tooltip>
+          <Row justify="space-around">
+            <Tooltip placement="left" title="Edit">
+              <EditOutlined
+                disabled={editingKey !== ""}
+                onClick={() => edit(record)}
+              />
+            </Tooltip>
+            <Tooltip placement="right" title="Delete">
+              <Popconfirm
+                title="Sure to delete?"
+                onConfirm={() => handleDelete(record.key)}
+              >
+                <DeleteOutlined disabled={editingKey !== ""} />
+              </Popconfirm>
+            </Tooltip>
+          </Row>
         );
       },
     },
@@ -355,11 +369,12 @@ function GetUsers() {
           components={{
             body: {
               cell: EditableCell,
+              row: EditableRow,
             },
           }}
           title={() => (
             <Title level={3} style={{ textAlign: "center" }}>
-              List Of Registered Accounts
+              List Of Questions
             </Title>
           )}
         />
@@ -368,4 +383,4 @@ function GetUsers() {
   );
 }
 
-export default GetUsers;
+export default GetQuestionsAdmin;

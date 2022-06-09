@@ -20,3 +20,9 @@ export const selectMaxQuestions = createSelector(
   [selectQuestion],
   (questionSlice) => questionSlice?.maxQuestions
 );
+
+// trỏ đến item questionsAdmin cuar questionSlice
+export const selectQuestionsAdmin = createSelector(
+  [selectQuestion],
+  (questionSlice) => questionSlice?.questionsAdmin
+);

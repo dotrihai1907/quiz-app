@@ -1,7 +1,7 @@
 import "antd/dist/antd.css";
 import { Modal } from "antd";
 import axios from "../../api/axios";
-import { loginSuccess, refreshSuccess } from "./reducer";
+import { loginSuccess, refreshSuccess, logoutSuccess } from "./reducer";
 
 export const register = (values, form) => async () => {
   try {
@@ -42,4 +42,18 @@ export const refresh = (refreshToken) => async (dispatch) => {
     refreshToken,
   });
   dispatch(refreshSuccess(data));
+};
+
+export const logout = (refreshToken) => async (dispatch) => {
+  try {
+    await axios.post("/v1/auth/logout", {
+      refreshToken,
+    });
+    dispatch(logoutSuccess());
+  } catch (error) {
+    Modal.error({
+      title: "Logout failed",
+      content: error.response.data.message,
+    });
+  }
 };

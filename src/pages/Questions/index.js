@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import styles from "./Questions.module.scss";
 import "antd/dist/antd.css";
 
@@ -37,7 +38,7 @@ function Questions() {
     if (accessToken && role === "user") {
       dispatch(getQuestion(accessToken, amount));
     }
-  }, [accessToken, amount, dispatch, role]);
+  }, [accessToken, amount, role]);
 
   useEffect(() => {
     if (questions?.length) {
