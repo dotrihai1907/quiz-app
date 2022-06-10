@@ -17,7 +17,6 @@ export const register = (values, form) => async () => {
   } catch (error) {
     Modal.error({
       title: "Register failed",
-      content: error.response.data.message,
     });
   }
 };
@@ -32,7 +31,6 @@ export const login = (values) => async (dispatch) => {
   } catch (error) {
     Modal.error({
       title: "Login failed",
-      content: error.response.data.message,
     });
   }
 };
@@ -53,7 +51,6 @@ export const logout = (refreshToken) => async (dispatch) => {
   } catch (error) {
     Modal.error({
       title: "Logout failed",
-      content: error.response.data.message,
     });
   }
 };

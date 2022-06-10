@@ -16,7 +16,6 @@ export const getQuestion = (accessToken, amount) => async (dispatch) => {
   } catch (error) {
     Modal.error({
       title: "Error getting questions",
-      content: error.response.data.message,
     });
   }
 };
@@ -30,7 +29,6 @@ export const getQuestionsAdmin = (accessToken) => async (dispatch) => {
   } catch (error) {
     Modal.error({
       title: "Get question by admin failed",
-      content: error.response.data.message,
     });
   }
 };
@@ -52,7 +50,6 @@ export const updateQuestion =
     } catch (error) {
       Modal.error({
         title: "Update question failed",
-        content: error.response.data.message,
       });
     }
   };
@@ -80,7 +77,6 @@ export const createQuestion = (values, accessToken, form) => async () => {
   } catch (error) {
     Modal.error({
       title: "Create question failed",
-      content: error.response.data.message,
     });
   }
 };
@@ -96,7 +92,6 @@ export const deleteQuestion = (key, accessToken) => async () => {
   } catch (err) {
     Modal.error({
       title: "Delete question failed",
-      content: err.response.data.message,
     });
   }
 };

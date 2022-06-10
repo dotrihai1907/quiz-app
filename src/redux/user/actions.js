@@ -12,7 +12,6 @@ export const getUsers = (accessToken) => async (dispatch) => {
   } catch (error) {
     Modal.error({
       title: "Get users failed",
-      content: error.response.data.message,
     });
   }
 };
@@ -38,7 +37,6 @@ export const createUser = (values, accessToken, form) => async () => {
   } catch (error) {
     Modal.error({
       title: "Create failed",
-      content: error.response.data.message,
     });
   }
 };
@@ -60,7 +58,6 @@ export const updateUser =
     } catch (error) {
       Modal.error({
         title: "Update user failed",
-        content: error.response.data.message,
       });
     }
   };
