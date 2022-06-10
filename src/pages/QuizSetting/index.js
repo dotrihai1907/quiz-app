@@ -1,7 +1,7 @@
 import styles from "./QuizSetting.module.scss";
 import "antd/dist/antd.css";
 
-import { Typography, InputNumber } from "antd";
+import { Typography, InputNumber, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -48,12 +48,10 @@ function QuizSetting() {
           return handleAmount(value);
         }}
       />
-
-      <div className={styles.loader} onClick={handleQuiz}>
-        <div className={styles.outer}></div>
-        <div className={styles.middle}></div>
-        <div className={styles.inner}></div>
-      </div>
+      <br />
+      <Button type="primary" className={styles.button} onClick={handleQuiz}>
+        Get Started
+      </Button>
     </div>
   );
 }
