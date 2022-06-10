@@ -52,54 +52,41 @@ function Admin() {
       <Layout className={styles.container}>
         <Sider trigger={null} collapsible collapsed={collapsed} theme="light">
           <div className={styles.logo}>{usernameAuth}</div>
-          <Menu
-            theme="light"
-            mode="inline"
-            items={[
-              {
-                key: "1",
-                icon: <FolderOpenOutlined />,
-                label: "User",
-                children: [
-                  {
-                    key: "subuser1",
-                    icon: <UserOutlined onClick={handleGetUsers} />,
-                    label: "Get Users",
-                  },
-                  {
-                    key: "subuser2",
-                    icon: (
-                      <UserAddOutlined
-                        onClick={() => navigate("/admin/createuser")}
-                      />
-                    ),
-                    label: "Create User",
-                  },
-                ],
-              },
-              {
-                key: "2",
-                icon: <ReadOutlined />,
-                label: "Question",
-                children: [
-                  {
-                    key: "subquestion1",
-                    icon: <FolderOutlined onClick={handleGetQuestions} />,
-                    label: "Get Questions",
-                  },
-                  {
-                    key: "subquestion2",
-                    icon: (
-                      <FolderAddOutlined
-                        onClick={() => navigate("/admin/createquestion")}
-                      />
-                    ),
-                    label: "Create Question",
-                  },
-                ],
-              },
-            ]}
-          />
+
+          <Menu theme="light" mode="inline">
+            <Menu.SubMenu key="1" icon={<FolderOpenOutlined />} title="User">
+              <Menu.Item
+                key="subuser1"
+                icon={<UserOutlined />}
+                onClick={handleGetUsers}
+              >
+                Get User
+              </Menu.Item>
+              <Menu.Item
+                key="subuser2"
+                icon={<UserAddOutlined />}
+                onClick={() => navigate("/admin/createuser")}
+              >
+                Create User
+              </Menu.Item>
+            </Menu.SubMenu>
+            <Menu.SubMenu key="2" icon={<ReadOutlined />} title="Question">
+              <Menu.Item
+                key="subquestion1"
+                icon={<FolderOutlined />}
+                onClick={handleGetQuestions}
+              >
+                Get Questions
+              </Menu.Item>
+              <Menu.Item
+                key="subquestion2"
+                icon={<FolderAddOutlined />}
+                onClick={() => navigate("/admin/createquestion")}
+              >
+                Create Question
+              </Menu.Item>
+            </Menu.SubMenu>
+          </Menu>
         </Sider>
         <Layout className={styles.site_layout}>
           <Header
