@@ -24,7 +24,7 @@ function Login() {
   return (
     <div>
       <Row>
-        <Col span={16} offset={4}>
+        <Col span={8} offset={8}>
           <Title level={2} style={{ textAlign: "center" }}>
             Log In
           </Title>
@@ -65,13 +65,6 @@ function Login() {
                 type="password"
                 placeholder="Password"
               />
-            </Form.Item>
-            <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox className={styles.remember}>Remember me</Checkbox>
-              </Form.Item>
-
-              <span className={styles.forgot}>Forgotten password?</span>
             </Form.Item>
 
             <Form.Item>
