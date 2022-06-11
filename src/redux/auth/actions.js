@@ -28,11 +28,7 @@ export const login = (values) => async (dispatch) => {
       password: values.password,
     });
     dispatch(loginSuccess(data));
-  } catch (error) {
-    Modal.error({
-      title: "Login failed",
-    });
-  }
+  } catch (error) {}
 };
 
 export const refresh = (refreshToken) => async (dispatch) => {

@@ -74,11 +74,7 @@ export const createQuestion = (values, accessToken, form) => async () => {
       title: "Create question successed",
     });
     form.resetFields();
-  } catch (error) {
-    Modal.error({
-      title: "Create question failed",
-    });
-  }
+  } catch (error) {}
 };
 
 export const deleteQuestion = (key, accessToken) => async () => {
