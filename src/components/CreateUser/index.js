@@ -132,7 +132,6 @@ function CreateUser() {
           >
             <Option value="admin">admin</Option>
             <Option value="user">user</Option>
-            <Option value="other">other</Option>
           </Select>
         </Form.Item>
 
