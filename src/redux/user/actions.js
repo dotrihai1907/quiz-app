@@ -34,11 +34,7 @@ export const createUser = (values, accessToken, form) => async () => {
       title: "Create successed",
     });
     form.resetFields();
-  } catch (error) {
-    Modal.error({
-      title: "Create failed",
-    });
-  }
+  } catch (error) {}
 };
 
 export const updateUser =

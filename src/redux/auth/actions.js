@@ -14,11 +14,7 @@ export const register = (values, form) => async () => {
       title: "Register successed",
     });
     form.resetFields();
-  } catch (error) {
-    Modal.error({
-      title: "Register failed",
-    });
-  }
+  } catch (error) {}
 };
 
 export const login = (values) => async (dispatch) => {
@@ -28,7 +24,11 @@ export const login = (values) => async (dispatch) => {
       password: values.password,
     });
     dispatch(loginSuccess(data));
-  } catch (error) {}
+  } catch (error) {
+    Modal.error({
+      title: "Login failed",
+    });
+  }
 };
 
 export const refresh = (refreshToken) => async (dispatch) => {

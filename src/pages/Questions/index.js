@@ -83,6 +83,7 @@ function Questions() {
       if (questionIndex + 1 < questions.length) {
         setQuestionIndex((questionIndex) => questionIndex + 1);
       } else {
+        console.log(answers);
         dispatch(submitAnswer(accessToken, answers, navigate));
       }
     }

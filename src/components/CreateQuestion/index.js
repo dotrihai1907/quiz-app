@@ -1,5 +1,7 @@
 import "antd/dist/antd.css";
-import { Form, Input, Button, Typography, Row } from "antd";
+import { Form, Input, Button, Typography, Row, Select } from "antd";
+
+import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -41,7 +43,13 @@ const tailFormItemLayout = {
 
 function CreateQuestion() {
   const { Title } = Typography;
+  const { Option } = Select;
   const [form] = Form.useForm();
+
+  const [answer1, setAnswer1] = useState();
+  const [answer2, setAnswer2] = useState();
+  const [answer3, setAnswer3] = useState();
+  const [answer4, setAnswer4] = useState();
 
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
@@ -50,6 +58,7 @@ function CreateQuestion() {
     console.log("Received values of form: ", values);
     dispatch(createQuestion(values, accessToken, form));
   };
+
   return (
     <div>
       <Row justify="center">
@@ -86,7 +95,7 @@ function CreateQuestion() {
             },
           ]}
         >
-          <Input />
+          <Input value={answer1} onChange={(e) => setAnswer1(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -99,7 +108,7 @@ function CreateQuestion() {
             },
           ]}
         >
-          <Input />
+          <Input value={answer2} onChange={(e) => setAnswer2(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -112,7 +121,7 @@ function CreateQuestion() {
             },
           ]}
         >
-          <Input />
+          <Input value={answer3} onChange={(e) => setAnswer3(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -125,7 +134,7 @@ function CreateQuestion() {
             },
           ]}
         >
-          <Input />
+          <Input value={answer4} onChange={(e) => setAnswer4(e.target.value)} />
         </Form.Item>
 
         <Form.Item
@@ -134,11 +143,16 @@ function CreateQuestion() {
           rules={[
             {
               required: true,
-              message: "Please input correct answer!",
+              message: "Please choose correct answer!",
             },
           ]}
         >
-          <Input />
+          <Select placeholder="Select a option" allowClear>
+            <Option value={answer1}>{answer1}</Option>
+            <Option value={answer2}>{answer2}</Option>
+            <Option value={answer3}>{answer3}</Option>
+            <Option value={answer4}>{answer4}</Option>
+          </Select>
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
