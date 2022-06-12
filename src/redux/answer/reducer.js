@@ -20,7 +20,6 @@ const answerSlice = createSlice({
           return state.answers;
         });
       }
-      console.log(state.answers);
     },
     resetQuiz: (state) => {
       state.answers = [];

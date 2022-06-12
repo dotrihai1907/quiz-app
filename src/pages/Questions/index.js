@@ -71,22 +71,25 @@ function Questions() {
     setQuestionIndex((questionIndex) => questionIndex + 1);
   };
 
-  const handleSaveandSubmitAnswer = () => {
+  const handleSaveAnswer = () => {
     if (answer === "") {
       Modal.error({
         title: "Note!",
         content: "You have not selected an answer",
       });
     } else {
+      console.log(questionId, answer);
       dispatch(saveAnswer({ id: questionId, correctanswer: answer }));
       setAnswer("");
       if (questionIndex + 1 < questions.length) {
         setQuestionIndex((questionIndex) => questionIndex + 1);
-      } else {
-        console.log(answers);
-        dispatch(submitAnswer(accessToken, answers, navigate));
       }
     }
+  };
+
+  const handleSubmitAnswer = () => {
+    console.log(answers);
+    dispatch(submitAnswer(accessToken, answers, navigate));
   };
 
   return (
@@ -123,17 +126,27 @@ function Questions() {
             Back
           </Button>
 
-          <Button shape="round" onClick={handleSaveandSubmitAnswer}>
-            {questionIndex + 1 < questions.length ? "Save & Next" : "Submit"}
-          </Button>
+          {
+            <Button shape="round" onClick={handleSaveAnswer}>
+              {questionIndex + 1 < questions.length ? "Save & Next" : "Save"}
+            </Button>
+          }
 
-          <Button
-            shape="round"
-            disabled={questionIndex + 1 < questions.length ? false : true}
-            onClick={handleSkip}
-          >
-            Skip
-          </Button>
+          {!(questionIndex + 1 < questions.length) && (
+            <Button shape="round" onClick={handleSubmitAnswer}>
+              Submit
+            </Button>
+          )}
+
+          {questionIndex + 1 < questions.length && (
+            <Button
+              shape="round"
+              disabled={questionIndex + 1 < questions.length ? false : true}
+              onClick={handleSkip}
+            >
+              Skip
+            </Button>
+          )}
         </Row>
       </div>
     </div>

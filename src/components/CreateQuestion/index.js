@@ -147,11 +147,11 @@ function CreateQuestion() {
             },
           ]}
         >
-          <Select placeholder="Select a option" allowClear>
-            <Option value={answer1}>{answer1}</Option>
-            <Option value={answer2}>{answer2}</Option>
-            <Option value={answer3}>{answer3}</Option>
-            <Option value={answer4}>{answer4}</Option>
+          <Select placeholder="Select a option">
+            <Option value={answer1} />
+            <Option value={answer2} />
+            <Option value={answer3} />
+            <Option value={answer4} />
           </Select>
         </Form.Item>
 
