@@ -3,14 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    users: undefined,
+    users: [],
   },
   reducers: {
     getUsersSuccess: (state, action) => {
       state.users = action.payload;
     },
     updateUserSuccess: (state, action) => {
-      state.users.results.map((item) => {
+      state.users.map((item) => {
         if (item.id === action.payload.id) {
           item = action.payload;
         }

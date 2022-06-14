@@ -47,7 +47,7 @@ function CreateUser() {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
 
-  const handleCreate = (values, form) => {
+  const handleCreate = (values) => {
     console.log("Received values of form: ", values);
     dispatch(createUser(values, accessToken, form));
   };

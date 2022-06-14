@@ -8,7 +8,7 @@ export const getUsers = (accessToken) => async (dispatch) => {
     const { data } = await axios.get("/v1/users?limit=500", {
       headers: { Authorization: `Bearer ${accessToken}` },
     });
-    dispatch(getUsersSuccess(data));
+    dispatch(getUsersSuccess(data.results));
   } catch (error) {
     Modal.error({
       title: "Get users failed",
