@@ -54,7 +54,7 @@ function CreateQuestion() {
   const dispatch = useDispatch();
   const accessToken = useSelector(selectAccessToken);
 
-  const handleCreateQuestion = (values, form) => {
+  const handleCreateQuestion = (values) => {
     console.log("Received values of form: ", values);
     dispatch(createQuestion(values, accessToken, form));
   };
@@ -156,7 +156,11 @@ function CreateQuestion() {
         </Form.Item>
 
         <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{ width: "100%", marginBottom: "15px" }}
+          >
             Create
           </Button>
         </Form.Item>
