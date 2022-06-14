@@ -44,7 +44,7 @@ function Register() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleRegister = (values, form) => {
+  const handleRegister = (values) => {
     console.log("Received values of form: ", values);
     dispatch(register(values, form));
   };
