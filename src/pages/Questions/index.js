@@ -21,6 +21,7 @@ function Questions() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [answer, setAnswer] = useState("");
+  const [isClick, setIsClick] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -83,6 +84,8 @@ function Questions() {
       setAnswer("");
       if (questionIndex + 1 < questions.length) {
         setQuestionIndex((questionIndex) => questionIndex + 1);
+      } else {
+        setIsClick(false);
       }
     }
   };
@@ -133,7 +136,11 @@ function Questions() {
           }
 
           {!(questionIndex + 1 < questions.length) && (
-            <Button shape="round" onClick={handleSubmitAnswer}>
+            <Button
+              shape="round"
+              onClick={handleSubmitAnswer}
+              disabled={isClick}
+            >
               Submit
             </Button>
           )}
