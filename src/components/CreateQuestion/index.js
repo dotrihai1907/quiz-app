@@ -88,11 +88,26 @@ function CreateQuestion() {
         <Form.Item
           name="answer1"
           label="Answer 1"
+          dependencies={["answer2", "answer3", "answer4"]}
           rules={[
             {
               required: true,
               message: "Please input frist answer!",
             },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (
+                  getFieldValue("answer2") === value ||
+                  getFieldValue("answer3") === value ||
+                  getFieldValue("answer4") === value
+                ) {
+                  return Promise.reject(
+                    new Error("Do not enter the same answer!")
+                  );
+                }
+                return Promise.resolve();
+              },
+            }),
           ]}
         >
           <Input value={answer1} onChange={(e) => setAnswer1(e.target.value)} />
@@ -101,11 +116,26 @@ function CreateQuestion() {
         <Form.Item
           name="answer2"
           label="Answer 2"
+          dependencies={["answer1", "answer3", "answer4"]}
           rules={[
             {
               required: true,
               message: "Please input second answer!",
             },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (
+                  getFieldValue("answer1") === value ||
+                  getFieldValue("answer3") === value ||
+                  getFieldValue("answer4") === value
+                ) {
+                  return Promise.reject(
+                    new Error("Do not enter the same answer!")
+                  );
+                }
+                return Promise.resolve();
+              },
+            }),
           ]}
         >
           <Input value={answer2} onChange={(e) => setAnswer2(e.target.value)} />
@@ -114,11 +144,26 @@ function CreateQuestion() {
         <Form.Item
           name="answer3"
           label="Answer 3"
+          dependencies={["answer1", "answer2", "answer4"]}
           rules={[
             {
               required: true,
               message: "Please input third answer!",
             },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (
+                  getFieldValue("answer1") === value ||
+                  getFieldValue("answer2") === value ||
+                  getFieldValue("answer4") === value
+                ) {
+                  return Promise.reject(
+                    new Error("Do not enter the same answer!")
+                  );
+                }
+                return Promise.resolve();
+              },
+            }),
           ]}
         >
           <Input value={answer3} onChange={(e) => setAnswer3(e.target.value)} />
@@ -127,11 +172,26 @@ function CreateQuestion() {
         <Form.Item
           name="answer4"
           label="Answer 4"
+          dependencies={["answer1", "answer2", "answer3"]}
           rules={[
             {
               required: true,
               message: "Please input 4th answer!",
             },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (
+                  getFieldValue("answer1") === value ||
+                  getFieldValue("answer2") === value ||
+                  getFieldValue("answer3") === value
+                ) {
+                  return Promise.reject(
+                    new Error("Do not enter the same answer!")
+                  );
+                }
+                return Promise.resolve();
+              },
+            }),
           ]}
         >
           <Input value={answer4} onChange={(e) => setAnswer4(e.target.value)} />
