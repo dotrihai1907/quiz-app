@@ -4,7 +4,7 @@ const questionSlice = createSlice({
   name: "question",
   initialState: {
     questions: [],
-    amount: 1,
+    amount: 6,
     maxQuestions: 1000,
     questionsAdmin: [],
   },
