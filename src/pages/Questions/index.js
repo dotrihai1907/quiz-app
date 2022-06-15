@@ -21,7 +21,7 @@ function Questions() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [options, setOptions] = useState([]);
   const [answer, setAnswer] = useState("");
-  const [isClick, setIsClick] = useState(true);
+  const [isClickNav, setIsClickNav] = useState(true);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,7 +85,7 @@ function Questions() {
       if (questionIndex + 1 < questions.length) {
         setQuestionIndex((questionIndex) => questionIndex + 1);
       } else {
-        setIsClick(false);
+        setIsClickNav(false);
       }
     }
   };
@@ -139,7 +139,7 @@ function Questions() {
             <Button
               shape="round"
               onClick={handleSubmitAnswer}
-              disabled={isClick}
+              disabled={isClickNav}
             >
               Submit
             </Button>
