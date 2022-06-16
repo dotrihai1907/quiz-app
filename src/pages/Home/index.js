@@ -1,7 +1,7 @@
 import "antd/dist/antd.css";
 import { AliwangwangOutlined } from "@ant-design/icons";
 import styles from "./Home.module.scss";
-import { Divider, Typography } from "antd";
+import { Divider, Typography, Row, Col } from "antd";
 import { Outlet } from "react-router-dom";
 import Logout from "../../components/Logout";
 
@@ -13,12 +13,16 @@ function Home() {
   const accessToken = useSelector(selectAccessToken);
   return (
     <div>
-      <Title className={styles.header}>
-        Quiz App
-        <AliwangwangOutlined />
-      </Title>
-      {accessToken && <Logout />}
-      <Divider />
+      <Row className={styles.header}>
+        <Col flex="80%">
+          <Title className={styles.title}>
+            Quiz App
+            <AliwangwangOutlined />
+          </Title>
+        </Col>
+        <Col flex="auto">{accessToken && <Logout />}</Col>
+        <Divider />
+      </Row>
       <Outlet />
     </div>
   );

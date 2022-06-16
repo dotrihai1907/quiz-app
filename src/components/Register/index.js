@@ -1,6 +1,6 @@
 import "antd/dist/antd.css";
 import styles from "./Register.module.scss";
-import { Form, Input, Checkbox, Button, Typography, Row } from "antd";
+import { Form, Input, Checkbox, Button, Typography, Row, Col } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -12,7 +12,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 8,
+      span: 6,
     },
   },
   wrapperCol: {
@@ -20,7 +20,7 @@ const formItemLayout = {
       span: 24,
     },
     sm: {
-      span: 8,
+      span: 12,
     },
   },
 };
@@ -32,7 +32,7 @@ const tailFormItemLayout = {
     },
     sm: {
       span: 12,
-      offset: 8,
+      offset: 6,
     },
   },
 };
@@ -54,135 +54,142 @@ function Register() {
   };
 
   return (
-    <div>
-      <Row justify="center">
-        <Title level={2}>Create New Account</Title>
-      </Row>
+    <Row>
+      <Col span={12} offset={6} className={styles.container}>
+        <Row justify="center">
+          <Title level={2} style={{ margin: 20 }}>
+            Create New Account
+          </Title>
+        </Row>
 
-      <Form
-        className={styles.form}
-        {...formItemLayout}
-        form={form}
-        name="register"
-        onFinish={handleRegister}
-        scrollToFirstError
-      >
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: "email",
-              message: "The input is not valid E-mail!",
-            },
-            {
-              required: true,
-              message: "Please input your E-mail!",
-            },
-          ]}
+        <Form
+          className={styles.form}
+          {...formItemLayout}
+          form={form}
+          name="register"
+          onFinish={handleRegister}
+          scrollToFirstError
         >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="username"
-          label="Username"
-          rules={[
-            {
-              required: true,
-              message: "Please input your Username!",
-            },
-            {
-              min: 5,
-              message: "Username must be minimum 5 characters.",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="password"
-          label="Password"
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-            {
-              min: 8,
-              message: "Username must be minimum 8 characters.",
-            },
-          ]}
-          hasFeedback
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="confirm"
-          label="Confirm Password"
-          dependencies={["password"]}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: "Please confirm your password!",
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue("password") === value) {
-                  return Promise.resolve();
-                }
-
-                return Promise.reject(
-                  new Error("The two passwords that you entered do not match!")
-                );
+          <Form.Item
+            name="email"
+            label="E-mail"
+            rules={[
+              {
+                type: "email",
+                message: "The input is not valid E-mail!",
               },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
-
-        <Form.Item
-          name="agreement"
-          valuePropName="checked"
-          rules={[
-            {
-              validator: (_, value) =>
-                value
-                  ? Promise.resolve()
-                  : Promise.reject(new Error("Should accept agreement")),
-            },
-          ]}
-          {...tailFormItemLayout}
-        >
-          <Checkbox>
-            I have read the <span className={styles.change}>agreement</span>
-          </Checkbox>
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-          <br />
-          <br />
-          <Text className={styles.text} italic offset="4">
-            Already have a account?
-          </Text>
-          <Text
-            className={styles.change}
-            underline
-            italic
-            onClick={handleChange}
+              {
+                required: true,
+                message: "Please input your E-mail!",
+              },
+            ]}
           >
-            {" "}
-            Log in
-          </Text>
-        </Form.Item>
-      </Form>
-    </div>
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="username"
+            label="Username"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Username!",
+              },
+              {
+                min: 5,
+                message: "Username must be minimum 5 characters.",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            label="Password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your password!",
+              },
+              {
+                min: 8,
+                message: "Username must be minimum 8 characters.",
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="confirm"
+            label="Confirm Password"
+            dependencies={["password"]}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: "Please confirm your password!",
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
+                },
+              }),
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
+
+          <Form.Item
+            name="agreement"
+            valuePropName="checked"
+            rules={[
+              {
+                validator: (_, value) =>
+                  value
+                    ? Promise.resolve()
+                    : Promise.reject(new Error("Should accept agreement")),
+              },
+            ]}
+            {...tailFormItemLayout}
+          >
+            <Checkbox>
+              I have read the <span className={styles.change}>agreement</span>
+            </Checkbox>
+          </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+            <br />
+            <br />
+            <Text className={styles.text} italic offset="4">
+              Already have a account?
+            </Text>
+            <Text
+              className={styles.change}
+              underline
+              italic
+              onClick={handleChange}
+            >
+              {" "}
+              Log in
+            </Text>
+          </Form.Item>
+        </Form>
+      </Col>
+    </Row>
   );
 }
 

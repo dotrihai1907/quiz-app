@@ -34,7 +34,7 @@ function Logout() {
           style={{ marginBottom: "10px" }}
           src={avatar}
           size={{
-            xs: 24,
+            xs: 34,
             md: 40,
             xl: 60,
           }}
@@ -73,7 +73,7 @@ function Logout() {
             className={styles.avatar}
             src={avatar}
             size={{
-              xs: 24,
+              xs: 30,
               md: 40,
               xl: 60,
             }}
