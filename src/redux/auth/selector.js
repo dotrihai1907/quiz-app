@@ -9,6 +9,12 @@ const selectAuth = createSelector(
   (authSlice) => authSlice?.auth // authSlice && authSlice.auth
 );
 
+// trỏ đến item loading của authSlice
+export const selectLoading = createSelector(
+  [selectAuthentication],
+  (authSlice) => authSlice?.loading // authSlice && authSlice.loading
+);
+
 //---------------user--------------------------------
 
 const selectUser = createSelector([selectAuth], (auth) => auth?.user);

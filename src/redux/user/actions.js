@@ -2,8 +2,10 @@ import "antd/dist/antd.css";
 import { Modal } from "antd";
 import axios from "../../api/axios";
 import { getUsersSuccess, updateUserSuccess } from "./reducer";
+import { loading, loadingDone } from "../auth/reducer";
 
 export const getUsers = (accessToken) => async (dispatch) => {
+  dispatch(loading());
   try {
     const { data } = await axios.get("/v1/users?limit=500", {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -13,10 +15,13 @@ export const getUsers = (accessToken) => async (dispatch) => {
     Modal.error({
       title: "Get users failed",
     });
+  } finally {
+    dispatch(loadingDone());
   }
 };
 
-export const createUser = (values, accessToken, form) => async () => {
+export const createUser = (values, accessToken, form) => async (dispatch) => {
+  dispatch(loading());
   try {
     await axios.post(
       "/v1/users",
@@ -34,11 +39,15 @@ export const createUser = (values, accessToken, form) => async () => {
       title: "Create successed",
     });
     form.resetFields();
-  } catch (error) {}
+  } catch (error) {
+  } finally {
+    dispatch(loadingDone());
+  }
 };
 
 export const updateUser =
   (accessToken, userUpdate, userIdUpdate) => async (dispatch) => {
+    dispatch(loading());
     try {
       const { data } = await axios.patch(
         `/v1/users/${userIdUpdate}`,
@@ -55,5 +64,7 @@ export const updateUser =
       Modal.error({
         title: "Update user failed",
       });
+    } finally {
+      dispatch(loadingDone());
     }
   };
