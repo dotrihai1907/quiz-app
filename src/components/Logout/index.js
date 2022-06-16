@@ -36,7 +36,7 @@ function Logout() {
           size={{
             xs: 34,
             md: 40,
-            xl: 60,
+            xl: 50,
           }}
         />
         <br />
@@ -75,7 +75,7 @@ function Logout() {
             size={{
               xs: 30,
               md: 40,
-              xl: 60,
+              xl: 50,
             }}
           />
         </Popover>
