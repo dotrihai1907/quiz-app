@@ -17,7 +17,7 @@ import {
   Typography,
 } from "antd";
 import Highlighter from "react-highlight-words";
-import { useState, useRef, createContext } from "react";
+import { useState, useRef, createContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { selectQuestionsAdmin } from "../../redux/question/selector";
@@ -40,6 +40,11 @@ function GetQuestionsAdmin() {
     answer4: item.answer4,
     correctanswer: item.correctanswer,
   }));
+
+  useEffect(() => {
+    setData(originData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //=======search============================
   const [searchText, setSearchText] = useState("");

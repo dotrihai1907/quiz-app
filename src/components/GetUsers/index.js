@@ -17,8 +17,9 @@ import {
   Form,
   Popconfirm,
   Tooltip,
+  Select,
 } from "antd";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Highlighter from "react-highlight-words";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -29,6 +30,7 @@ import { updateUser } from "../../redux/user/actions";
 
 function GetUsers() {
   const { Title } = Typography;
+  const { Option } = Select;
   const dispatch = useDispatch();
   const users = useSelector(selectUsers);
   const accessToken = useSelector(selectAccessToken);
@@ -41,6 +43,11 @@ function GetUsers() {
     score: user.score,
     avatar: user.avatar,
   }));
+
+  useEffect(() => {
+    setData(originData);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //-------------search--------
 
@@ -164,7 +171,7 @@ function GetUsers() {
     ...restProps
   }) => (
     <td {...restProps}>
-      {editing ? (
+      {editing && dataIndex !== "role" && (
         <Form.Item
           name={dataIndex}
           style={{
@@ -179,9 +186,27 @@ function GetUsers() {
         >
           <Input />
         </Form.Item>
-      ) : (
-        children
       )}
+      {editing && dataIndex === "role" && (
+        <Form.Item
+          name={dataIndex}
+          style={{
+            margin: 0,
+          }}
+          rules={[
+            {
+              required: true,
+              message: `Please Select ${title}!`,
+            },
+          ]}
+        >
+          <Select>
+            <Option value={"user"} />
+            <Option value={"admin"} />
+          </Select>
+        </Form.Item>
+      )}
+      {!editing && children}
     </td>
   );
 
@@ -334,7 +359,6 @@ function GetUsers() {
       ...col,
       onCell: (record) => ({
         record,
-        inputType: "text",
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
