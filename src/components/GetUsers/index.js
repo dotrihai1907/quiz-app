@@ -19,7 +19,7 @@ import {
   Tooltip,
   Select,
 } from "antd";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -43,11 +43,6 @@ function GetUsers() {
     score: user.score,
     avatar: user.avatar,
   }));
-
-  useEffect(() => {
-    setData(originData);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   //-------------search--------
 
