@@ -1,7 +1,6 @@
 import "antd/dist/antd.css";
 import styles from "./Login.module.scss";
 import { Form, Input, Button, Typography, Row, Col } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
